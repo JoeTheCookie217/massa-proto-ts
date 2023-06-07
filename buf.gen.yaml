@@ -14,9 +14,3 @@ plugins:
   - name: ts
     out: build/nodejs
     opt: grpc_js
-
-  # - remote: buf.build/stephenh/plugins/ts-proto
-  #   out: gen/ts
-  #   opt:
-  #     - outputServices=...
-  #     - useExactTypes=...

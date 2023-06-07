@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node server.ts",
-    "dev": "SET HOST=0.0.0.0 && nodemon server.ts",
-    "build": "buf generate"
+    "start": "ts-node main.ts",
+    "dev": "SET HOST=0.0.0.0 && nodemon main.ts",
+    "build": "buf generate",
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "",
