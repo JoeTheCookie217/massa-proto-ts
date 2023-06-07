@@ -10,6 +10,10 @@ plugins:
     out: build/nodejs
     opt: grpc_js
     path: grpc_tools_node_protoc_plugin
+  
+  - name: ts
+    out: build/nodejs
+    opt: grpc_js
 
   # - remote: buf.build/stephenh/plugins/ts-proto
   #   out: gen/ts
