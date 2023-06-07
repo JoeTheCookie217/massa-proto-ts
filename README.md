@@ -1,0 +1,1 @@
+install globally buf.build, grpc-tools, grpc_tools_node_protoc_ts
