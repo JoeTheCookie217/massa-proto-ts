@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node main.ts",
-    "dev": "SET HOST=0.0.0.0 && nodemon main.ts",
+    "dev": "nodemon main.ts",
+    "dev:local": "SET HOST=0.0.0.0 && nodemon main.ts",
     "build": "buf generate",
     "postinstall": "npm run build"
   },
