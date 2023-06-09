@@ -9,12 +9,6 @@ import {
 } from "./build/nodejs/api_pb";
 import { TransactionsThroughputResponse } from "./build/nodejs/api_pb";
 
-const port = process.env.PORT || 33037;
-const host = process.env.HOST || "37.187.156.118";
-const url = `${host}:${port}`.replace(" ", "");
-console.log(url);
-const service = new MassaServiceClient(url, credentials.createInsecure());
-
 const getVersion = async (): Promise<GetVersionResponse> => {
     return new Promise((resolve, reject) => {
         service.getVersion(new GetVersionRequest(), (err, version) => {
@@ -22,57 +16,6 @@ const getVersion = async (): Promise<GetVersionResponse> => {
                 return reject(err);
             }
             return resolve(version);
-        });
-    });
-};
-
-const subscribeNewOperations = async () => {
-    const stream = service.newOperations();
-    return new Promise((resolve, reject) => {
-        stream.on("data", (data: NewOperationsResponse) => {
-            console.log(data.toObject());
-        });
-        stream.on("error", (err) => {
-            console.log(err);
-            reject(err);
-        });
-        stream.on("end", (e: any) => {
-            console.log("end");
-            resolve(e);
-        });
-    });
-};
-
-const subscribeTransactionsThroughput = async () => {
-    const stream = service.transactionsThroughput();
-    return new Promise((resolve, reject) => {
-        stream.on("data", (data: TransactionsThroughputResponse) => {
-            console.log(data.toObject());
-        });
-        stream.on("error", (err) => {
-            console.log(err);
-            reject(err);
-        });
-        stream.on("end", (e: any) => {
-            console.log("end");
-            resolve(e);
-        });
-    });
-};
-
-const subscribeNewSlotExecutionOutputs = async () => {
-    const stream = service.newSlotExecutionOutputs();
-    return new Promise((resolve, reject) => {
-        stream.on("data", (data: NewSlotExecutionOutputsResponse) => {
-            console.log(data.toObject());
-        });
-        stream.on("error", (err) => {
-            console.log(err);
-            reject(err);
-        });
-        stream.on("end", (e: any) => {
-            console.log("end");
-            resolve(e);
         });
     });
 };
@@ -102,31 +45,9 @@ const subscribeFilledBlocks = async () => {
     });
 };
 
-const subscribe = async <Req, Res extends { toObject: () => any }>(
-    stream: ClientDuplexStream<Req, Res>
-) => {
-    return new Promise((resolve, reject) => {
-        stream.on("data", (data: Res) => {
-            console.log(data.toObject());
-        });
-        stream.on("error", (err) => {
-            console.log(err);
-            reject(err);
-        });
-        stream.on("end", (e: any) => {
-            console.log("end");
-            resolve(e);
-        });
-    });
-};
-
-(async () => {
-    getVersion().then((v) => console.log(v.getVersion()));
-
-    subscribeFilledBlocks();
-    // subscribeNewOperations();
-    // subscribeTransactionsThroughput();
-    // subscribeNewSlotExecutionOutputs();
-
-    // subscribe(service.newFilledBlocks());
-})();
+const port = process.env.PORT || 33037;
+const host = process.env.HOST || "37.187.156.118";
+const url = `${host}:${port}`.replace(" ", "");
+console.log(url);
+const service = new MassaServiceClient(url, credentials.createInsecure());
+subscribeFilledBlocks();

@@ -19,6 +19,7 @@
     "protoc-gen-js": "^3.21.2"
   },
   "devDependencies": {
+    "grpc-tools": "^1.12.4",
     "nodemon": "^2.0.22",
     "ts-node": "^10.9.1"
   }
