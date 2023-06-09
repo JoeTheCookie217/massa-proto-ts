@@ -50,4 +50,10 @@ const host = process.env.HOST || "37.187.156.118";
 const url = `${host}:${port}`.replace(" ", "");
 console.log(url);
 const service = new MassaServiceClient(url, credentials.createInsecure());
-subscribeFilledBlocks();
+
+(async () => {
+    const version = await getVersion();
+    console.log(version.toObject());
+
+    subscribeFilledBlocks();
+})();
