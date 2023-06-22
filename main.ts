@@ -4,10 +4,7 @@ import {
     GetVersionRequest,
     GetVersionResponse,
     NewFilledBlocksResponse,
-    NewOperationsResponse,
-    NewSlotExecutionOutputsResponse,
 } from "./build/nodejs/api_pb";
-import { TransactionsThroughputResponse } from "./build/nodejs/api_pb";
 
 const getVersion = async (): Promise<GetVersionResponse> => {
     return new Promise((resolve, reject) => {
